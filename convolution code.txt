@@ -1,0 +1,23 @@
+mask1 = [1 2 3 4 5 6 7 8;1 2 3 4 5 6 7 8;1 2 3 4 5 6 7 8;1 2 3 4 5 6 7 8;1 2 3 4 5 6 7 8; 1 2 3 4 5 6 7 8 ; 1 2 3 4 5 6 7 8 ; 1 2 3 4 5 6 7 8 ]
+mask2 =  [1 1 1 ;1 1 1 ;1 1 1]
+mask3 = []
+[x,y] = size(mask1)
+[m,n] = size(mask2)
+spare = (m-1) / 2
+
+mask3(1,1) = mask1(1,1)*mask2(1,1)
+a = (m+1)/2
+b = (n+1)/2
+sum = 0
+for k = 1:x-spare-spare
+    for l = 1:y-spare-spare
+        for i = 1:m
+            for j = 1:n
+                sum=sum+mask1(k-1+i,l-1+i)*mask2(i,j)
+            end    
+        end
+        %sum = sum/9
+        mask1(k+spare,l+spare) = sum
+        sum = 0
+    end
+end    
